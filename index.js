@@ -13,6 +13,16 @@ var logFactory = require('docker-loghose');
 var eventsFactory = require('docker-event-log');
 var os = require('os');
 
+process.on('SIGTERM', function() {
+  console.log('\ncaught SIGTERM, stopping gracefully');
+  process.exit(0);
+});
+
+process.on('SIGINT', function() {
+  console.log('\ncaught SIGINT, stopping gracefully');
+  process.exit(0);
+});
+
 function connect(opts) {
   var stream;
   if (opts.secure) {
